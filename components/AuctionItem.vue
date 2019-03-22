@@ -21,7 +21,12 @@
             <span class="badge badge-pill badge-light">{{item.max_bid}} KTC</span>
           </div>
           <p align="center">
-            <button id="show-modal" @click="showModal=true" class="btn btn-primary btn-block">Bid</button>
+            <button
+              id="show-modal"
+              @click="showModal=true"
+              class="btn btn-primary btn-block"
+              :disabled="!!expired"
+            >Bid</button>
           </p>
         </div>
       </div>
