@@ -66,6 +66,7 @@
                           placeholder="KTC"
                           v-model="bidValue"
                           :min="item.price"
+                          v-on:keyup="bidAmountChangeHandler"
                         >
                       </div>
                     </div>
@@ -73,7 +74,12 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" @click="showModal = false">Close</button>
-                  <button type="button" class="btn btn-primary" v-on:click="registerBid">Bid now!</button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    v-on:click="registerBid"
+                    :disabled="!canBid"
+                  >Bid now!</button>
                 </div>
               </div>
             </div>
@@ -95,9 +101,9 @@ export default {
       showModal: false,
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
-      bidValue: this.item.price,
       maxBidAmount: 0,
-      expired: this.endDate === "EXPIRED"
+      expired: this.endDate === "EXPIRED",
+      canBid: false
     };
   },
   mounted: function() {
@@ -134,6 +140,9 @@ export default {
         this.endDate = getTimeLeft(this.item.end_at * 1000);
         this.expired = this.endDate === "EXPIRED";
       }, 1000);
+    },
+    bidAmountChangeHandler() {
+      this.canBid = this.bidValue > this.maxBidAmount;
     }
   }
 };
