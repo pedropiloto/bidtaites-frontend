@@ -24,8 +24,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div class="page-header">
+        <h1>Create new auction</h1>
+      </div>
       <div class="row auctionCreate">
-        <div class="col-sm-12">
+        <div class="col-sm-12 auctionForm">
           <div class="form-group">
             <label for="exampleInputEmail1">Title</label>
             <input
@@ -172,5 +175,18 @@ export default {
 <style>
 .auctionCreate {
   margin-top: 4%;
+  background-color: #f8f9fa;
+}
+
+.auctionForm {
+  padding: 0 2rem;
+}
+
+@media (min-width: 768px) {
+  .auctionCreate {
+    border: 1px solid #efefef;
+    border-radius: 1rem;
+    padding: 2rem 0
+  }
 }
 </style>

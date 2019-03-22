@@ -24,6 +24,30 @@ html {
   margin: 0;
 }
 
+:root {
+  --font-family-sans-serif: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
+body {
+  font-family: var(--font-family-sans-serif, sans-serif);
+}
+
+.btn {
+  border-radius: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.badge-pill {
+  border: 1px solid lightgrey;
+}
+
+.btn-primary {
+  background: linear-gradient(30deg, hsla(211, 100, 50, 1) 80%, hsla(211, 100, 100, 1));
+  /*background: linear-gradient(45deg, #e66465, #9198e5);*/
+  border: none;
+}
+
 .button--green {
   display: inline-block;
   border-radius: 4px;

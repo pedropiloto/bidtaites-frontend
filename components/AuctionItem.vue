@@ -1,12 +1,12 @@
 <template>
   <div>
-    <li class="span4">
+    <li class="span4 auctionCard">
       <div class="thumbnail">
         <div class="crop">
           <img v-bind:src="item.photo" alt="ALT NAME">
         </div>
         <div class="caption">
-          <h3>{{item.title}}</h3>
+          <h3 class="auctionCard-title">{{item.title}}</h3>
           <div class="d-flex justify-content-between auctionItemDetails">
             <div>
               <small>Base</small>
@@ -24,7 +24,7 @@
             <button
               id="show-modal"
               @click="showModal=true"
-              class="btn btn-primary btn-block"
+              class="btn btn-primary btn-block buttonBid"
               :disabled="!!expired"
             >Bid</button>
           </p>
@@ -195,5 +195,33 @@ ul {
   width: 100%;
   top: 50%;
   left: 50%;
+}
+
+.auctionCard {
+  background-color: #f8f9fa;
+  margin-bottom: 4rem;
+  border-radius: 2rem 2rem 1.5rem 1.5rem;
+
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.auctionCard-title {
+  display: inline;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.auctionCard .caption {
+  padding: 2rem 1rem;
+  max-width: 320px;
+}
+
+.auctionCard img {
+  border-radius: 2rem 2rem 0 0;
+}
+
+.buttonBid {
+  margin-top: 12%;
 }
 </style>

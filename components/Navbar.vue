@@ -19,9 +19,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link class="nav-link" to="/auction-create">Auction Creation</router-link>
-        </li>
+        </li>-->
       </ul>
     </div>
   </nav>
