@@ -29,7 +29,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
+                  <h5 class="modal-title">Bid</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" @click="showModal = false">&times;</span>
                   </button>
@@ -37,16 +37,6 @@
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-sm-12">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Contact Number</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-describedby="emailHelp"
-                          placeholder="Contact Number"
-                          v-model="bidContactNumber"
-                        >
-                      </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
                         <input
@@ -58,13 +48,14 @@
                         >
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Bid Amount</label>
+                        <label for="exampleInputEmail1">Value</label>
                         <input
                           type="number"
                           class="form-control"
                           aria-describedby="emailHelp"
-                          placeholder="Bid"
-                          v-model="bidAmount"
+                          placeholder="KTC"
+                          v-model="bidValue"
+                          :min="item.price"
                         >
                       </div>
                     </div>
@@ -76,7 +67,7 @@
                     type="button"
                     class="btn btn-primary"
                     v-on:click="registerBid"
-                  >Save changes</button>
+                  >Bid now!</button>
                 </div>
               </div>
             </div>
@@ -89,24 +80,35 @@
 
 <script>
 import axios from "axios";
+import { API_URL } from "~/config";
+
 export default {
   props: ["item"],
   data: function() {
     return {
       showModal: false,
       endDate: getTimeLeft(this.item.end_at * 1000),
-      bidContactNumber: "",
       bidEmail: "",
-      bidAmount: ""
+      bidValue: this.item.price
     };
   },
   created: function() {
-    this.startTime();
+    this.startTime()
+    console.log(this.item.value)
+    this.value = this.item.value
   },
   methods: {
     registerBid: function() {
-      axios.post("https://bidtaites.free.beeceptor.com/auctions").then(res => {
-        console.log("item: " + this.item.id + "res: " + res);
+      var url = API_URL + "/api/auctions/" + this.item.id + "/bids"
+      console.log(url)
+      var params = {
+        auction_id: this.item.id,
+        email: this.bidEmail,
+        value: this.bidValue
+      }
+      axios.post(url, params).then(res => {
+        console.log(res)
+        window.location = res.data.redirect
       });
     },
     startTime: function() {
