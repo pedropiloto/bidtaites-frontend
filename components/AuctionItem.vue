@@ -64,7 +64,7 @@
                           step="1 "
                           class="form-control"
                           aria-describedby="emailHelp"
-                          placeholder="KTC"
+                          placeholder="UTK"
                           v-model="bidValue"
                           :min="item.price"
                           v-on:keyup="bidAmountChangeHandler"
@@ -154,7 +154,7 @@ export default {
   }
 };
 
-var getTimeLeft = limitDate => {
+export var getTimeLeft = limitDate => {
   // Get todays date and time
   var now = new Date().getTime();
 

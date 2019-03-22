@@ -17,8 +17,9 @@
 import Logo from "~/components/Logo.vue";
 import Navbar from "~/components/Navbar.vue";
 import AuctionItem from "~/components/AuctionItem";
+import { getTimeLeft } from "~/components/AuctionItem";
 import axios from "axios";
-import { API_URL } from "~/config";
+import { API_URL, EXPIRED } from "~/config";
 
 export default {
   components: {
@@ -46,7 +47,20 @@ export default {
       axios
         .get(url)
         .then(res => {
-          this.auctions = res.data;
+          this.auctions = res.data.sort((a, b) => {
+            var tA = a.end_at;
+            var tB = b.end_at;
+            var timeLeftA = getTimeLeft(tA * 1000);
+            var result;
+            if (timeLeftA === EXPIRED) return 1;
+            if (tA > tB) {
+              return 1;
+            } else if (tB > tA && tB) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
         })
         .catch(exception => {
           console.log(exception);
