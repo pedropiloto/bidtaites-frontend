@@ -31,38 +31,22 @@ export default {
       title: "Bidtaites"
     };
   },
-  created: () => {
+  data: function() {
+    return {
+      auctions: []
+    };
+  },
+  mounted() {
     var url = BASE_URL + "/auctions";
     axios
       .get(url)
       .then(res => {
         console.log(res);
-        this.auctions = [
-          {
-            id: "1",
-            title: "Auction 1",
-            price: 20,
-            image_url: "https://pbs.twimg.com/media/D2LaUdsXQAADOQb.jpg",
-            limit_date: new Date("Mar 24, 2019 15:37:25").getTime()
-          },
-          {
-            id: "2",
-            title: "Auction 2",
-            price: 20,
-            image_url:
-              "https://pngimage.net/wp-content/uploads/2018/05/default-image-png-2.png",
-            limit_date: new Date("Apr 26, 2019 15:37:25").getTime()
-          }
-        ];
+        this.auctions = res.data;
       })
       .catch(exception => {
         console.log(exception);
       });
-  },
-  data: function() {
-    return {
-      auctions: []
-    };
   }
 };
 </script>

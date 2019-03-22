@@ -3,7 +3,7 @@
     <li class="span4">
       <div class="thumbnail">
         <div class="crop">
-          <img v-bind:src="item.image_url" alt="ALT NAME">
+          <img v-bind:src="item.photo" alt="ALT NAME">
         </div>
         <div class="caption">
           <h3>{{item.title}}</h3>
@@ -94,14 +94,13 @@ export default {
   data: function() {
     return {
       showModal: false,
-      endDate: getTimeLeft(this.item.limit_date),
+      endDate: getTimeLeft(this.item.end_at * 1000),
       bidContactNumber: "",
       bidEmail: "",
       bidAmount: ""
     };
   },
   created: function() {
-    console.log("created");
     this.startTime();
   },
   methods: {
@@ -112,8 +111,7 @@ export default {
     },
     startTime: function() {
       setInterval(() => {
-        var limitDate = this.item.limit_date;
-        this.endDate = getTimeLeft(this.item.limit_date);
+        this.endDate = getTimeLeft(this.item.end_at * 1000);
       }, 1000);
     }
   }

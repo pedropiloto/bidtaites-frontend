@@ -110,6 +110,7 @@ export default {
   methods: {
     register: function() {
       var url = BASE_URL + "/auctions";
+      debugger;
       var params = {
         title: this.title,
         description: this.description,
@@ -120,6 +121,7 @@ export default {
         end_at: Math.round(new Date(this.date).getTime() / 1000)
       };
       console.log(params);
+      debugger;
       axios.post(url, params).then(res => {
         console.log(res);
       });
