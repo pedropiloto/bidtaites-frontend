@@ -10,15 +10,15 @@
           <div class="d-flex justify-content-between auctionItemDetails">
             <div>
               <small>Base</small>
-              <span class="badge badge-pill badge-light">{{item.price}} UTK</span>
+              <span class="badge badge-pill badge-light">{{item.price}} €</span>
             </div>
             <div>
               <span class="badge badge-pill badge-light">{{endDate}}</span>
             </div>
           </div>
-          <div v-if="item.max_bid">
-            <small>Latest</small>
-            <span class="badge badge-pill badge-light">{{item.max_bid}} UTK</span>
+          <div>
+            <small>Top Bid</small>
+            <span class="badge badge-pill badge-light">{{maxBidAmount}} €</span>
           </div>
           <p align="center">
             <button
@@ -96,12 +96,14 @@ export default {
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
       bidValue: this.item.price,
+      maxBidAmount: 0,
       expired: this.endDate === "EXPIRED"
     };
   },
-  created: function() {
+  mounted: function() {
     this.startTime();
     this.value = this.item.value;
+    this.getDetails(this.item.uuid);
   },
   methods: {
     registerBid: function() {
@@ -114,6 +116,18 @@ export default {
       axios.post(url, params).then(res => {
         window.location = res.data.redirect;
       });
+    },
+    getDetails(id) {
+      var url = API_URL + "/api/auctions/" + this.item.uuid;
+      axios
+        .get(url)
+        .then(res => {
+          console.log(res.data.max_bid);
+          this.maxBidAmount = res.data.max_bid ? res.data.max_bid : 0;
+        })
+        .catch(exception => {
+          console.log(exception);
+        });
     },
     startTime: function() {
       setInterval(() => {
