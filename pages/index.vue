@@ -32,21 +32,31 @@ export default {
     };
   },
   created() {
-    var url = API_URL + "/api/auctions";
-    axios
-      .get(url)
-      .then(res => {
-        console.log(res);
-        this.auctions = res.data;
-      })
-      .catch(exception => {
-        console.log(exception);
-      });
+    this.getAuctions();
+    this.startTime();
   },
   data() {
     return {
       auctions: []
     };
+  },
+  methods: {
+    getAuctions() {
+      var url = API_URL + "/api/auctions";
+      axios
+        .get(url)
+        .then(res => {
+          this.auctions = res.data;
+        })
+        .catch(exception => {
+          console.log(exception);
+        });
+    },
+    startTime: function() {
+      setInterval(() => {
+        this.getAuctions();
+      }, 10000);
+    }
   }
 };
 </script>

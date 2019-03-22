@@ -146,11 +146,9 @@ export default {
         phone_number: this.phone_number,
         end_at: Math.round(new Date(this.date).getTime() / 1000)
       };
-      console.log(params);
       axios
         .post(url, params)
         .then(res => {
-          console.log(res);
           this.success = true;
           this.fail = false;
 

@@ -9,11 +9,16 @@
           <h3>{{item.title}}</h3>
           <div class="d-flex justify-content-between auctionItemDetails">
             <div>
+              <small>Base</small>
               <span class="badge badge-pill badge-light">{{item.price}} KTC</span>
             </div>
             <div>
               <span class="badge badge-pill badge-light">{{endDate}}</span>
             </div>
+          </div>
+          <div>
+            <small>Latest</small>
+            <span class="badge badge-pill badge-light">{{item.max_bid}} KTC</span>
           </div>
           <p align="center">
             <button id="show-modal" @click="showModal=true" class="btn btn-primary btn-block">Bid</button>
@@ -63,11 +68,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" @click="showModal = false">Close</button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    v-on:click="registerBid"
-                  >Bid now!</button>
+                  <button type="button" class="btn btn-primary" v-on:click="registerBid">Bid now!</button>
                 </div>
               </div>
             </div>
@@ -93,22 +94,19 @@ export default {
     };
   },
   created: function() {
-    this.startTime()
-    console.log(this.item.value)
-    this.value = this.item.value
+    this.startTime();
+    this.value = this.item.value;
   },
   methods: {
     registerBid: function() {
-      var url = API_URL + "/api/auctions/" + this.item.id + "/bids"
-      console.log(url)
+      var url = API_URL + "/api/auctions/" + this.item.id + "/bids";
       var params = {
         auction_id: this.item.id,
         email: this.bidEmail,
         value: this.bidValue
-      }
+      };
       axios.post(url, params).then(res => {
-        console.log(res)
-        window.location = res.data.redirect
+        window.location = res.data.redirect;
       });
     },
     startTime: function() {
