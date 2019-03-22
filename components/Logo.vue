@@ -4,6 +4,10 @@
 
 <style>
 .logo {
-  height: 30px;
+  height: 4rem;
+}
+
+.logo:active {
+  margin-top: -.5rem;
 }
 </style>

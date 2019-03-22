@@ -40,5 +40,6 @@ export default {
 <style>
 .navbar {
   margin-bottom: 30px;
+  height: 6rem;
 }
 </style>
