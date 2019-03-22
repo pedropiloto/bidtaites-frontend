@@ -1,7 +1,7 @@
 {
   "name": "bidtaites",
   "version": "1.0.0",
-  "description": "My dazzling Nuxt.js project",
+  "description": "Bid awesome products using UTrust Cryptocurrency",
   "author": "André Freitas",
   "private": true,
   "scripts": {
