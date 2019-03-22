@@ -85,7 +85,7 @@ import Navbar from "~/components/Navbar.vue";
 import axios from "axios";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-import { BASE_URL } from "~/config";
+import { API_URL } from "~/config";
 
 export default {
   components: {
@@ -109,8 +109,7 @@ export default {
   },
   methods: {
     register: function() {
-      var url = BASE_URL + "/auctions";
-      debugger;
+      var url = API_URL + "/api/auctions";
       var params = {
         title: this.title,
         description: this.description,
