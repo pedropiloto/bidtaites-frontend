@@ -85,6 +85,7 @@ import Navbar from "~/components/Navbar.vue";
 import axios from "axios";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { BASE_URL } from "~/config";
 
 export default {
   components: {
@@ -101,14 +102,14 @@ export default {
       phone_number: "",
       date: new Date(),
       options: {
-        format: "DD/MM/YYYY",
+        format: "MM/DD/YYYY",
         useCurrent: false
       }
     };
   },
   methods: {
     register: function() {
-      var url = "http://localhost:4000/api/auctions";
+      var url = BASE_URL + "/auctions";
       var params = {
         title: this.title,
         description: this.description,
@@ -116,8 +117,9 @@ export default {
         price: this.price,
         email: this.email,
         phone_number: this.phone_number,
-        end_at: this.date.getTime()
+        end_at: Math.round(new Date(this.date).getTime() / 1000)
       };
+      console.log(params);
       axios.post(url, params).then(res => {
         console.log(res);
       });

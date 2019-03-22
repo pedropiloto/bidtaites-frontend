@@ -17,6 +17,8 @@
 import Logo from "~/components/Logo.vue";
 import Navbar from "~/components/Navbar.vue";
 import AuctionItem from "~/components/AuctionItem";
+import axios from "axios";
+import { BASE_URL } from "~/config";
 
 export default {
   components: {
@@ -29,26 +31,37 @@ export default {
       title: "Bidtaites"
     };
   },
+  created: () => {
+    var url = BASE_URL + "/auctions";
+    axios
+      .get(url)
+      .then(res => {
+        console.log(res);
+        this.auctions = [
+          {
+            id: "1",
+            title: "Auction 1",
+            price: 20,
+            image_url: "https://pbs.twimg.com/media/D2LaUdsXQAADOQb.jpg",
+            limit_date: new Date("Mar 24, 2019 15:37:25").getTime()
+          },
+          {
+            id: "2",
+            title: "Auction 2",
+            price: 20,
+            image_url:
+              "https://pngimage.net/wp-content/uploads/2018/05/default-image-png-2.png",
+            limit_date: new Date("Apr 26, 2019 15:37:25").getTime()
+          }
+        ];
+      })
+      .catch(exception => {
+        console.log(exception);
+      });
+  },
   data: function() {
     return {
-      auctions: [
-        {
-          id: "1",
-          title: "Auction 1",
-          price: 20,
-          image_url:
-            "https://pbs.twimg.com/media/D2LaUdsXQAADOQb.jpg",
-          limit_date: new Date("Mar 24, 2019 15:37:25").getTime()
-        },
-        {
-          id: "2",
-          title: "Auction 2",
-          price: 20,
-          image_url:
-            "https://pngimage.net/wp-content/uploads/2018/05/default-image-png-2.png",
-          limit_date: new Date("Apr 26, 2019 15:37:25").getTime()
-        }
-      ]
+      auctions: []
     };
   }
 };
