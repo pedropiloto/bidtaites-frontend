@@ -102,7 +102,7 @@ export default {
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
       maxBidAmount: 0,
-      expired: this.endDate === "EXPIRED",
+      expired: true,
       canBid: false
     };
   },
