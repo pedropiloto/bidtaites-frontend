@@ -2,12 +2,14 @@
   <div>
     <li class="span4">
       <div class="thumbnail">
-        <img v-bind:src="item.image_url" style="width:320px;height:200px" alt="ALT NAME">
+        <div class="crop">
+          <img v-bind:src="item.image_url" alt="ALT NAME">
+        </div>
         <div class="caption">
           <h3>{{item.title}}</h3>
           <div class="d-flex justify-content-between auctionItemDetails">
             <div>
-              <span class="badge badge-pill badge-light">90</span>
+              <span class="badge badge-pill badge-light">{{item.price}} KTC</span>
             </div>
             <div>
               <span class="badge badge-pill badge-light">{{endDate}}</span>
@@ -104,7 +106,6 @@ export default {
   },
   methods: {
     registerBid: function() {
-      console.log("dssdsds");
       axios.post("https://bidtaites.free.beeceptor.com/auctions").then(res => {
         console.log("item: " + this.item.id + "res: " + res);
       });
@@ -162,5 +163,18 @@ ul {
 .auctionItemDetails {
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+.crop {
+  height: 200px;
+  width: 320px;
+  overflow: hidden;
+}
+
+.crop img {
+  max-width: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
 }
 </style>

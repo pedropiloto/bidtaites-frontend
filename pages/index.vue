@@ -37,7 +37,7 @@ export default {
           title: "Auction 1",
           price: 20,
           image_url:
-            "https://pngimage.net/wp-content/uploads/2018/05/default-image-png-2.png",
+            "https://pbs.twimg.com/media/D2LaUdsXQAADOQb.jpg",
           limit_date: new Date("Mar 24, 2019 15:37:25").getTime()
         },
         {

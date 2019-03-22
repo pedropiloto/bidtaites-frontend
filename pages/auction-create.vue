@@ -11,7 +11,7 @@
               class="form-control"
               aria-describedby="emailHelp"
               placeholder="Item Title"
-              v-model="itemTitle"
+              v-model="title"
             >
           </div>
 
@@ -22,7 +22,29 @@
               class="form-control"
               aria-describedby="emailHelp"
               placeholder="Item Description"
-              v-model="itemDescription"
+              v-model="description"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Photo</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Photo"
+              v-model="photo"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Base Price</label>
+            <input
+              type="number"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Base Price"
+              v-model="price"
             >
           </div>
 
@@ -33,48 +55,18 @@
               class="form-control"
               aria-describedby="emailHelp"
               placeholder="Email"
-              v-model="contactEmail"
+              v-model="email"
             >
           </div>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Contact Number</label>
+            <label for="exampleInputEmail1">Phone Number</label>
             <input
               type="text"
               class="form-control"
               aria-describedby="emailHelp"
-              placeholder="Contact Number"
-              v-model="contactNumber"
-            >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Base Price</label>
-            <input
-              type="number"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Base Price"
-              v-model="basePrice"
-            >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Image</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Image"
-              v-model="image"
-            >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Contact Number</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Contact Number"
-              v-model="contactNumber"
+              placeholder="Phone Number"
+              v-model="phone_number"
             >
           </div>
           <div class="form-group">
@@ -101,10 +93,12 @@ export default {
   },
   data: function() {
     return {
-      itemTitle: "",
-      itemDescription: "",
-      basePrice: "",
-      image: "",
+      title: "",
+      description: "",
+      photo: "",
+      price: "",
+      email: "",
+      phone_number: "",
       date: new Date(),
       options: {
         format: "DD/MM/YYYY",
@@ -114,8 +108,17 @@ export default {
   },
   methods: {
     register: function() {
-      console.log("dssdsds: " + this.date.getTime());
-      axios.post("https://bidtaites.free.beeceptor.com/auctions").then(res => {
+      var url = "http://localhost:4000/api/auctions";
+      var params = {
+        title: this.title,
+        description: this.description,
+        photo: this.photo,
+        price: this.price,
+        email: this.email,
+        phone_number: this.phone_number,
+        end_at: this.date.getTime()
+      };
+      axios.post(url, params).then(res => {
         console.log(res);
       });
     }
