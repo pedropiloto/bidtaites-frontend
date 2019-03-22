@@ -1,1 +1,1 @@
-export const BASE_URL = "https://e15da36b.ngrok.io/api";
+export const API_URL = process.env.apiUrl

@@ -18,7 +18,7 @@ import Logo from "~/components/Logo.vue";
 import Navbar from "~/components/Navbar.vue";
 import AuctionItem from "~/components/AuctionItem";
 import axios from "axios";
-import { BASE_URL } from "~/config";
+import { API_URL } from "~/config";
 
 export default {
   components: {
@@ -32,7 +32,7 @@ export default {
     };
   },
   created: () => {
-    var url = BASE_URL + "/auctions";
+    var url = API_URL + "/api/auctions";
     axios
       .get(url)
       .then(res => {
