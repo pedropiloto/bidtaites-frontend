@@ -37,7 +37,7 @@ export default {
       .get(url)
       .then(res => {
         console.log(res);
-        debugger;
+        //debugger;
         this.auctions = res.data;
       })
       .catch(exception => {

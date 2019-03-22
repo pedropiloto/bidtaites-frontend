@@ -2,6 +2,28 @@
   <div>
     <Navbar/>
     <div class="container">
+      <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="success">
+        <strong>Success</strong> Created with success
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="fail">
+        <strong>Fail</strong> Not Created with success
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <div class="row auctionCreate">
         <div class="col-sm-12">
           <div class="form-group">
@@ -86,11 +108,14 @@ import axios from "axios";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { API_URL } from "~/config";
+import Snotify from "vue-snotify"; // 1. Import Snotify
+import Noty from "noty";
 
 export default {
   components: {
     Navbar,
-    datePicker
+    datePicker,
+    Snotify
   },
   data: function() {
     return {
@@ -104,7 +129,9 @@ export default {
       options: {
         format: "MM/DD/YYYY",
         useCurrent: false
-      }
+      },
+      success: false,
+      fail: false
     };
   },
   methods: {
@@ -120,10 +147,26 @@ export default {
         end_at: Math.round(new Date(this.date).getTime() / 1000)
       };
       console.log(params);
-      debugger;
-      axios.post(url, params).then(res => {
-        console.log(res);
-      });
+      //debugger;
+      axios
+        .post(url, params)
+        .then(res => {
+          console.log(res);
+          this.success = true;
+          this.fail = false;
+
+          //clean fields
+          this.title = "";
+          this.description = "";
+          this.photo = "";
+          this.price = "";
+          this.email = "";
+          this.phone_number = "";
+        })
+        .catch(exception => {
+          this.success = false;
+          this.fail = true;
+        });
     }
   }
 };
