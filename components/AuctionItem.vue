@@ -64,7 +64,7 @@
                           step="1 "
                           class="form-control"
                           aria-describedby="emailHelp"
-                          placeholder="UTK"
+                          placeholder="Euro"
                           v-model="bidValue"
                           :min="item.price"
                           v-on:keyup="bidAmountChangeHandler"
