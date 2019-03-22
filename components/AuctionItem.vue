@@ -61,12 +61,14 @@
                         <label for="exampleInputEmail1">Value</label>
                         <input
                           type="number"
+                          step="1 "
                           class="form-control"
                           aria-describedby="emailHelp"
                           placeholder="KTC"
                           v-model="bidValue"
                           :min="item.price"
                           v-on:keyup="bidAmountChangeHandler"
+                          v-on:keydown="bidAmountChangeHandler"
                         >
                       </div>
                     </div>
@@ -101,6 +103,7 @@ export default {
       showModal: false,
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
+      bidValue: 0,
       maxBidAmount: 0,
       expired: true,
       canBid: false
@@ -141,8 +144,12 @@ export default {
         this.expired = this.endDate === "EXPIRED";
       }, 1000);
     },
-    bidAmountChangeHandler() {
+    bidAmountChangeHandler(event) {
+      console.log(event);
       this.canBid = this.bidValue > this.maxBidAmount;
+      this.bidValue = !!this.bidValue
+        ? this.bidValue.replace(/(\.)+/, "")
+        : null;
     }
   }
 };
