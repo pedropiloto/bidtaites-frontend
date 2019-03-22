@@ -10,7 +10,7 @@
           <div class="d-flex justify-content-between auctionItemDetails">
             <div>
               <small>Base</small>
-              <span class="badge badge-pill badge-light">{{item.price}} KTC</span>
+              <span class="badge badge-pill badge-light">{{item.price}} UTK</span>
             </div>
             <div>
               <span class="badge badge-pill badge-light">{{endDate}}</span>
@@ -18,7 +18,7 @@
           </div>
           <div v-if="item.max_bid">
             <small>Latest</small>
-            <span class="badge badge-pill badge-light">{{item.max_bid}} KTC</span>
+            <span class="badge badge-pill badge-light">{{item.max_bid}} UTK</span>
           </div>
           <p align="center">
             <button
