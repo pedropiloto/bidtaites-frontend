@@ -21,12 +21,7 @@
             <span class="badge badge-pill badge-light">{{item.max_bid}} KTC</span>
           </div>
           <p align="center">
-            <button
-              id="show-modal"
-              @click="showModal=true"
-              class="btn btn-primary btn-block"
-              disabled="!!expired"
-            >Bid</button>
+            <button id="show-modal" @click="showModal=true" class="btn btn-primary btn-block">Bid</button>
           </p>
         </div>
       </div>
@@ -96,7 +91,7 @@ export default {
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
       bidValue: this.item.price,
-      expired: this.endDate !== "EXPIRED"
+      expired: this.endDate === "EXPIRED"
     };
   },
   created: function() {
@@ -118,7 +113,7 @@ export default {
     startTime: function() {
       setInterval(() => {
         this.endDate = getTimeLeft(this.item.end_at * 1000);
-        this.expired = this.endDate !== "EXPIRED";
+        this.expired = this.endDate === "EXPIRED";
       }, 1000);
     }
   }
