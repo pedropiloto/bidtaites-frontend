@@ -77,7 +77,10 @@
               v-model="contactNumber"
             >
           </div>
-          <date-picker v-model="date" :config="options"></date-picker>
+          <div class="form-group">
+            <label for="exampleInputEmail1">End Date</label>
+            <date-picker v-model="date" :config="options"></date-picker>
+          </div>
           <button class="btn btn-primary" v-on:click="register">Register Auction</button>
         </div>
       </div>
@@ -93,7 +96,8 @@ import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    datePicker
   },
   data: function() {
     return {
@@ -110,7 +114,7 @@ export default {
   },
   methods: {
     register: function() {
-      console.log("dssdsds");
+      console.log("dssdsds: " + this.date.getTime());
       axios.post("https://bidtaites.free.beeceptor.com/auctions").then(res => {
         console.log(res);
       });
