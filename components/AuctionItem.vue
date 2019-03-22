@@ -16,12 +16,17 @@
               <span class="badge badge-pill badge-light">{{endDate}}</span>
             </div>
           </div>
-          <div>
+          <div v-if="item.max_bid">
             <small>Latest</small>
             <span class="badge badge-pill badge-light">{{item.max_bid}} KTC</span>
           </div>
           <p align="center">
-            <button id="show-modal" @click="showModal=true" class="btn btn-primary btn-block">Bid</button>
+            <button
+              id="show-modal"
+              @click="showModal=true"
+              class="btn btn-primary btn-block"
+              disabled="!!expired"
+            >Bid</button>
           </p>
         </div>
       </div>
@@ -90,7 +95,8 @@ export default {
       showModal: false,
       endDate: getTimeLeft(this.item.end_at * 1000),
       bidEmail: "",
-      bidValue: this.item.price
+      bidValue: this.item.price,
+      expired: this.endDate !== "EXPIRED"
     };
   },
   created: function() {
@@ -99,7 +105,7 @@ export default {
   },
   methods: {
     registerBid: function() {
-      var url = API_URL + "/api/auctions/" + this.item.id + "/bids";
+      var url = API_URL + "/api/auctions/" + this.item.uuid + "/bids";
       var params = {
         auction_id: this.item.id,
         email: this.bidEmail,
@@ -112,6 +118,7 @@ export default {
     startTime: function() {
       setInterval(() => {
         this.endDate = getTimeLeft(this.item.end_at * 1000);
+        this.expired = this.endDate !== "EXPIRED";
       }, 1000);
     }
   }
