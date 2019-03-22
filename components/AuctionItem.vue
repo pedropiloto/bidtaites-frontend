@@ -109,7 +109,7 @@ export default {
     registerBid: function() {
       var url = API_URL + "/api/auctions/" + this.item.uuid + "/bids";
       var params = {
-        auction_id: this.item.id,
+        auction_id: this.item.uuid,
         email: this.bidEmail,
         value: this.bidValue
       };
