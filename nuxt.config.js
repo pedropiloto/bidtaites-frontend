@@ -15,7 +15,10 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Montserrat:400,700"}
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      }
     ]
   },
 
@@ -39,7 +42,13 @@ export default {
    */
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
-    "bootstrap-vue/nuxt"
+    [
+      "bootstrap-vue/nuxt",
+      "@nuxtjs/google-analytics",
+      {
+        id: "UA-101604472-2"
+      }
+    ]
   ],
 
   /*
