@@ -69,7 +69,7 @@ export default {
     startTime: function() {
       setInterval(() => {
         this.getAuctions();
-      }, 10000);
+      }, 6000);
     }
   }
 };

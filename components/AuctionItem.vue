@@ -131,7 +131,6 @@ export default {
       axios
         .get(url)
         .then(res => {
-          console.log(res.data.max_bid);
           this.maxBidAmount = res.data.max_bid ? res.data.max_bid : 0;
         })
         .catch(exception => {
@@ -145,8 +144,8 @@ export default {
       }, 1000);
     },
     bidAmountChangeHandler(event) {
-      console.log(event);
-      this.canBid = this.bidValue > this.maxBidAmount;
+      this.canBid =
+        this.bidValue > this.maxBidAmount && this.bidValue > this.item.price;
       this.bidValue = !!this.bidValue
         ? this.bidValue.replace(/(\.)+/, "")
         : null;
