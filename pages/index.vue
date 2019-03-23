@@ -47,20 +47,22 @@ export default {
       axios
         .get(url)
         .then(res => {
-          this.auctions = res.data.sort((a, b) => {
-            var tA = a.end_at;
-            var tB = b.end_at;
-            var timeLeftA = getTimeLeft(tA * 1000);
-            var result;
-            if (timeLeftA === EXPIRED) return 1;
-            if (tA > tB) {
-              return 1;
-            } else if (tB > tA && tB) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
+          this.auctions = res.data
+            .sort((a, b) => {
+              var tA = a.end_at;
+              var tB = b.end_at;
+              var timeLeftA = getTimeLeft(tA * 1000);
+              var result;
+              if (timeLeftA === EXPIRED) return 1;
+              if (tA > tB) {
+                return 1;
+              } else if (tB > tA && tB) {
+                return -1;
+              } else {
+                return 0;
+              }
+            })
+            .reverse();
         })
         .catch(exception => {
           console.log(exception);
